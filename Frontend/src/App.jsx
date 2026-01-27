@@ -1,30 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+// Layout Components
 import Navbar from "./assets/components/navbar";
 import Footer from "./assets/components/footer";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import ScrollToTopButton from "./assets/components/scroll";
+
+// Pages
 import Landing from "./assets/components/landing";
 import Admission from "./assets/components/admission.jsx";
 import Department from "./assets/components/department.jsx";
 import Resources from "./assets/components/resources.jsx";
-import ScrollToTopButton from "./assets/components/scroll.jsx";
 import NewApplicants from "./assets/components/NewApplicants.jsx";
-import { useEffect } from "react";
 import Error from "./assets/components/error.jsx";
 import Devloper from "./assets/components/devloper.jsx";
 import Gallery from "./assets/components/gallery.jsx";
 import Dress from "./assets/components/dress.jsx";
 import EventGallery from "./assets/components/eventGallery.jsx";
 
-const Layout = ({ children }) => (
-  <>
-    <Navbar />
-    <ScrollToTopButton />
-    {children}
-    <Footer />
-  </>
-);
+// Intro
+import IntroVideo from "./assets/components/introvideo.jsx";
 
-const App = () => {
+// ---------------- Layout ----------------
+const Layout = ({ children }) => {
+  return (
+    <>
+      <Navbar />
+      <ScrollToTopButton />
+      {children}
+      <Footer />
+    </>
+  );
+};
+
+// ---------------- Real App ----------------
+const RealApp = () => {
   useEffect(() => {
     fetch(`${import.meta.env.VITE_BACKEND}/api/v1/track`, {
       method: "GET",
@@ -32,6 +42,7 @@ const App = () => {
       console.error("Failed to update visitor count:", err);
     });
   }, []);
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -114,9 +125,34 @@ const App = () => {
       ),
     },
   ]);
+
+  return <RouterProvider router={router} />;
+};
+
+// ---------------- Final App (with Intro) ----------------
+const App = () => {
+  const [showIntro, setShowIntro] = useState(true);
+
+  // Play intro only once per session
+  useEffect(() => {
+    const seen = sessionStorage.getItem("introSeen");
+    if (seen) {
+      setShowIntro(false);
+    }
+  }, []);
+
+  const handleFinish = () => {
+    sessionStorage.setItem("introSeen", "true");
+    setShowIntro(false);
+  };
+
   return (
     <>
-      <RouterProvider router={router} />
+      {showIntro ? (
+        <IntroVideo onFinish={handleFinish} />
+      ) : (
+        <RealApp />
+      )}
     </>
   );
 };
