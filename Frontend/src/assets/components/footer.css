@@ -1,0 +1,150 @@
+.spotlight-footer {
+  position: relative;
+  background: #050505;
+  color: white;
+  padding: 3rem 1rem;
+  text-align: center;
+  overflow: hidden;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Spotlight glow */
+.spotlight-glow {
+  position: absolute;
+  top: -60%;
+  left: -30%;
+  width: 160%;
+  height: 160%;
+  background: radial-gradient(
+    circle at center,
+    rgba(255,255,255,0.08),
+    transparent 60%
+  );
+  animation: glowMove 8s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes glowMove {
+  0% { transform: translateX(-10%); }
+  50% { transform: translateX(10%); }
+  100% { transform: translateX(-10%); }
+}
+
+.footer-content {
+  position: relative;
+  z-index: 2;
+}
+
+.footer-title {
+  font-size: 1.1rem;
+  margin-bottom: 1.2rem;
+  opacity: 0.9;
+  letter-spacing: 0.3px;
+}
+
+/* Top links */
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.divider {
+  opacity: 0.4;
+}
+
+/* Spotlight links */
+.spotlight-footer a,
+.theme-toggle {
+  position: relative;
+  color: #aaa;
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Underline */
+.spotlight-footer a::after,
+.theme-toggle::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg, #fff, #999);
+  transition: width 0.3s ease;
+}
+
+/* Hover glow */
+.spotlight-footer a:hover,
+.theme-toggle:hover {
+  color: white;
+  transform: translateY(-2px) scale(1.05);
+  text-shadow: 0 0 10px rgba(255,255,255,0.8);
+}
+
+.spotlight-footer a:hover::after,
+.theme-toggle:hover::after {
+  width: 100%;
+}
+
+/* Icon effects */
+.spotlight-footer i {
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.spotlight-footer a:hover i,
+.theme-toggle:hover i {
+  color: #fff;
+  filter: drop-shadow(0 0 8px rgba(255,255,255,0.9));
+  transform: rotate(-6deg) scale(1.2);
+}
+
+/* Profile rows */
+.profiles {
+  margin-top: 1rem;
+}
+
+.profiles p {
+  margin: 0.6rem 0;
+  font-size: 0.95rem;
+}
+
+.profiles span {
+  margin: 0 0.5rem;
+  opacity: 0.4;
+}
+
+/* Dark mode */
+.dark-mode .spotlight-footer {
+  background: #000;
+}
+
+.dark-mode .spotlight-footer a,
+.dark-mode .theme-toggle {
+  color: #bbb;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .footer-title {
+    font-size: 1rem;
+  }
+
+  .profiles p {
+    font-size: 0.9rem;
+  }
+
+  .footer-links {
+    gap: 0.7rem;
+  }
+}
