@@ -1,120 +1,256 @@
-/* Add this to your CSS file */
+/* ===================== */
+/* Global Reset */
+/* ===================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
-/* If you have a fixed header, add this */
-section {
-  scroll-margin-top: 80px;
-  /* adjust based on your header height */
+body {
+  background: radial-gradient(circle at top, #0f172a, #020617);
+  color: #e5e7eb;
+  font-family: "Inter", system-ui, sans-serif;
+  line-height: 1.7;
 }
 
-.department-list {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  gap: 20px;
-  padding: 30px 0;
-  text-align: center;
-  margin: 20px;
-  justify-content: center;
-
-}
-
-.department-item {
-  background: #F7F7F2;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease-in-out;
-  font-size: 1.1rem;
-  color: #21897E;
-  font-weight: bold;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  cursor: pointer;
-  max-height: 300px;
-  max-width: 300px;
-  transition: 0.5s ease-in-out;
-}
-
-
-.department-item:hover {
-  background-color: #7D7ABC;
-  color: #F7F7F2;
-  transform: translateY(-5px) scale(1.03);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-
-}
-
-.department-item:hover h2 {
-  color: #eb8a90;
-}
-
+/* ===================== */
+/* Departments Hero */
+/* ===================== */
 .department {
-  font-size: 50px;
-  font-weight: 600px;
-  margin: 20px;
+  min-height: 100vh;
+  padding: 80px 8%;
   text-align: center;
-  color: rgba(0, 0, 0, 0.515);
+}
+
+.department h1 {
+  font-size: 3.2rem;
+  font-weight: 800;
+  background: linear-gradient(90deg, #38bdf8, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .department p {
-  font-size: 15px;
+  max-width: 800px;
+  margin: 12px auto;
+  opacity: 0.85;
+  font-size: 1.05rem;
 }
 
+/* ===================== */
+/* Department Grid 3x2 */
+/* ===================== */
+.department-list {
+  margin-top: 60px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  gap: 30px;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .department-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .department-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===================== */
+/* Department Cards */
+/* ===================== */
+.department-item {
+  text-decoration: none;
+  color: inherit;
+  padding: 28px;
+  border-radius: 18px;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.department-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(56, 189, 248, 0.25),
+    transparent
+  );
+  opacity: 0;
+  transition: 0.5s;
+}
+
+.department-item:hover::before {
+  opacity: 1;
+}
+
+.department-item:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 30px 80px rgba(56, 189, 248, 0.25);
+  border-color: #38bdf8;
+}
+
+.department-item h2 {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+}
+
+.department-item p {
+  font-size: 0.95rem;
+  opacity: 0.8;
+}
+
+/* ===================== */
+/* Main Content */
+/* ===================== */
+main {
+  padding: 80px 8%;
+}
+
+/* ===================== */
+/* Department Sections */
+/* ===================== */
 .admission {
-  background: #f7f7f2;
-  padding: 40px 20px;
-  border: 1px solid rgba(0, 0, 0, 0.515);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  font-family: 'Segoe UI', sans-serif;
-  margin: 2% 8%;
+  margin-bottom: 100px;
+  animation: fadeUp 1s ease both;
+  position: relative;
 }
 
 .admission h2 {
-  text-align: center;
-  font-size: 2rem;
+  font-size: 2.2rem;
   margin-bottom: 30px;
-  color: #6457A6;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #38bdf8;
 }
 
-.admission .info-box {
-  background: #fff;
-  border-left: 5px solid #21897E;
-  margin-bottom: 25px;
-  padding: 20px 25px;
-  border-radius: 8px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
+/* ===================== */
+/* Info Cards */
+/* ===================== */
+.info-box {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(18px);
+  border-radius: 16px;
+  padding: 24px 28px;
+  margin-bottom: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  transition: all 0.35s ease;
 }
 
-.admission .info-box h3 {
-  color: #7D7ABC;
+.info-box:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 60px rgba(167, 139, 250, 0.25);
+  border-color: #a78bfa;
+}
+
+.info-box h3 {
   margin-bottom: 10px;
   font-size: 1.2rem;
+  color: #a78bfa;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.admission .info-box ul {
-  margin: 0;
-  padding-left: 20px;
+.info-box ul {
+  padding-left: 18px;
 }
 
-.admission .info-box li {
-  margin-bottom: 8px;
-  line-height: 1.6;
+.info-box li {
+  margin-bottom: 6px;
+  opacity: 0.9;
 }
 
-.admission .info-box p {
-  line-height: 1.6;
+/* ===================== */
+/* Contact Box */
+/* ===================== */
+.contact-box {
+  background: linear-gradient(
+    135deg,
+    rgba(56, 189, 248, 0.15),
+    rgba(167, 139, 250, 0.15)
+  );
+  border: 1px solid rgba(56, 189, 248, 0.4);
 }
 
-.admission a {
-  color: #21897E;
+.contact-box a {
+  color: #38bdf8;
+  text-decoration: none;
+}
+
+.contact-box a:hover {
   text-decoration: underline;
 }
 
-.contact-box {
-  border-left-color: #EB8A90;
+/* ===================== */
+/* Animations */
+/* ===================== */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===================== */
+/* Scroll Glow */
+/* ===================== */
+.admission::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at top,
+    rgba(56, 189, 248, 0.15),
+    transparent 60%
+  );
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* ===================== */
+/* Mobile Adjustments */
+/* ===================== */
+@media (max-width: 768px) {
+  .department h1 {
+    font-size: 2.4rem;
+  }
+
+  .admission h2 {
+    font-size: 1.6rem;
+  }
+
+  main,
+  .department {
+    padding: 60px 5%;
+  }
 }

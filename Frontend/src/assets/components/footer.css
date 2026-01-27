@@ -1,28 +1,34 @@
+/* ===================== */
+/* Clean Compact Footer */
+/* ===================== */
+
 .spotlight-footer {
   position: relative;
-  background: #050505;
-  color: white;
-  padding: 3rem 1rem;
+  background: linear-gradient(180deg, #020617, #000000);
+  color: #cbd5f5;
+  padding: 1.6rem 1rem;   /* MUCH smaller */
   text-align: center;
   overflow: hidden;
-  border-top: 1px solid rgba(255,255,255,0.1);
-  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  font-family: "Inter", system-ui, sans-serif;
 }
 
-/* Spotlight glow */
+/* Subtle ambient glow (very light now) */
 .spotlight-glow {
   position: absolute;
-  top: -60%;
-  left: -30%;
-  width: 160%;
-  height: 160%;
+  top: -100%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
   background: radial-gradient(
     circle at center,
-    rgba(255,255,255,0.08),
-    transparent 60%
+    rgba(56,189,248,0.08),
+    rgba(167,139,250,0.05),
+    transparent 70%
   );
-  animation: glowMove 8s linear infinite;
+  animation: glowMove 14s ease-in-out infinite;
   pointer-events: none;
+  opacity: 0.4;
 }
 
 @keyframes glowMove {
@@ -36,41 +42,43 @@
   z-index: 2;
 }
 
+/* Small title */
 .footer-title {
-  font-size: 1.1rem;
-  margin-bottom: 1.2rem;
-  opacity: 0.9;
+  font-size: 0.9rem;
+  margin-bottom: 0.6rem;
+  opacity: 0.7;
   letter-spacing: 0.3px;
 }
 
-/* Top links */
+/* Links row */
 .footer-links {
   display: flex;
   justify-content: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
+  gap: 1.2rem;
+  margin-bottom: 0.6rem;
   flex-wrap: wrap;
 }
 
 .divider {
-  opacity: 0.4;
+  opacity: 0.25;
 }
 
-/* Spotlight links */
+/* Links */
 .spotlight-footer a,
 .theme-toggle {
   position: relative;
-  color: #aaa;
+  color: #94a3b8;
   text-decoration: none;
+  font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
   display: inline-flex;
   align-items: center;
   gap: 6px;
 }
 
-/* Underline */
+/* Thin underline */
 .spotlight-footer a::after,
 .theme-toggle::after {
   content: "";
@@ -78,17 +86,15 @@
   left: 0;
   bottom: -4px;
   width: 0%;
-  height: 2px;
-  background: linear-gradient(90deg, #fff, #999);
-  transition: width 0.3s ease;
+  height: 1.5px;
+  background: linear-gradient(90deg, #38bdf8, #a78bfa);
+  transition: width 0.25s ease;
 }
 
-/* Hover glow */
+/* Hover (clean, not flashy) */
 .spotlight-footer a:hover,
 .theme-toggle:hover {
-  color: white;
-  transform: translateY(-2px) scale(1.05);
-  text-shadow: 0 0 10px rgba(255,255,255,0.8);
+  color: #ffffff;
 }
 
 .spotlight-footer a:hover::after,
@@ -96,55 +102,44 @@
   width: 100%;
 }
 
-/* Icon effects */
+/* Icons (minimal now) */
 .spotlight-footer i {
-  font-size: 1rem;
-  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  transition: 0.25s ease;
 }
 
 .spotlight-footer a:hover i,
 .theme-toggle:hover i {
-  color: #fff;
-  filter: drop-shadow(0 0 8px rgba(255,255,255,0.9));
-  transform: rotate(-6deg) scale(1.2);
+  color: #38bdf8;
 }
 
-/* Profile rows */
+/* Profiles (separated line) */
 .profiles {
-  margin-top: 1rem;
+  margin-top: 0.8rem;
+  font-size: 0.85rem;
+  opacity: 0.7;
 }
 
 .profiles p {
-  margin: 0.6rem 0;
-  font-size: 0.95rem;
+  margin: 0.2rem 0;
 }
 
 .profiles span {
-  margin: 0 0.5rem;
-  opacity: 0.4;
-}
-
-/* Dark mode */
-.dark-mode .spotlight-footer {
-  background: #000;
-}
-
-.dark-mode .spotlight-footer a,
-.dark-mode .theme-toggle {
-  color: #bbb;
+  margin: 0 0.4rem;
+  opacity: 0.3;
 }
 
 /* Mobile */
 @media (max-width: 600px) {
-  .footer-title {
-    font-size: 1rem;
-  }
-
-  .profiles p {
-    font-size: 0.9rem;
+  .spotlight-footer {
+    padding: 1.2rem 0.8rem;
   }
 
   .footer-links {
-    gap: 0.7rem;
+    gap: 0.8rem;
+  }
+
+  .footer-title {
+    font-size: 0.85rem;
   }
 }
