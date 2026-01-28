@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import "./navbar.css";
 
 const navItems = [
@@ -12,69 +12,27 @@ const navItems = [
 ];
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
-  const navRef = useRef(null);
-
-  useEffect(() => {
-    const nav = navRef.current;
-    if (!nav) return;
-
-    const handleMouseMove = (e) => {
-      const rect = nav.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      nav.style.setProperty("--spotlight-x", `${x}px`);
-      nav.classList.add("hovering");
-    };
-
-    const handleMouseLeave = () => {
-      nav.classList.remove("hovering");
-      moveToActive();
-    };
-
-    nav.addEventListener("mousemove", handleMouseMove);
-    nav.addEventListener("mouseleave", handleMouseLeave);
-
-    moveToActive();
-
-    return () => {
-      nav.removeEventListener("mousemove", handleMouseMove);
-      nav.removeEventListener("mouseleave", handleMouseLeave);
-    };
-  }, [activeIndex]);
-
-  const moveToActive = () => {
-    const nav = navRef.current;
-    if (!nav) return; // FIXED: prevent null access on initial render
-
-    const activeItem = nav.querySelector(
-      `[data-index="${activeIndex}"]`
-    );
-    if (!activeItem) return;
-
-    const navRect = nav.getBoundingClientRect();
-    const itemRect = activeItem.getBoundingClientRect();
-    const x = itemRect.left - navRect.left + itemRect.width / 2;
-
-    nav.style.setProperty("--ambience-x", `${x}px`);
-    nav.style.setProperty("--spotlight-x", `${x}px`);
-  };
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="header">
-      <div className="logo">
+    <header className="navbar-wrapper">
+      {/* Logo */}
+      <div className="navbar-logo">
         <a href="/">⚡ GECK Assist</a>
       </div>
 
-      <nav ref={navRef} className={`spotlight-nav ${isMenuOpen ? "open" : ""}`}>
-        <ul className="nav-links">
-          {navItems.map((item, idx) => (
-            <li key={idx}>
+      {/* Glass Navbar */}
+      <nav className={`glass-navbar ${menuOpen ? "open" : ""}`}>
+        <ul className="nav-items">
+          {navItems.map((item, index) => (
+            <li key={index}>
               <a
                 href={item.href}
-                data-index={idx}
-                className={activeIndex === idx ? "active" : ""}
-                onClick={() => setActiveIndex(idx)}
+                className={`nav-link ${
+                  activeIndex === index ? "active" : ""
+                }`}
+                onClick={() => setActiveIndex(index)}
               >
                 {item.label}
               </a>
@@ -82,19 +40,15 @@ const Navbar = () => {
           ))}
         </ul>
 
-        {/* Hamburger */}
-        <div className="hamburger" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+        {/* Mobile Hamburger */}
+        <div
+          className={`hamburger ${menuOpen ? "active" : ""}`}
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
           <span />
           <span />
           <span />
         </div>
-
-        {/* Spotlight layer */}
-        <div className="spotlight-layer" />
-        {/* Active lightning */}
-        <div className="ambience-layer" />
-        {/* Bottom border */}
-        <div className="border-track" />
       </nav>
     </header>
   );
