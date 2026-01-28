@@ -1,53 +1,160 @@
-/* Wrapper */
+/* ================================
+   GLOBAL RESET (REMOVE TOP GAP)
+================================ */
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+/* ================================
+   NAVBAR WRAPPER (FULL WIDTH)
+================================ */
 .nav-wrapper {
   display: flex;
-  justify-content: center;
-  margin-top: 30px;
+  align-items: center;
+  justify-content: space-between; /* logo left, nav center */
+  padding: 16px 32px;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 100;
 }
 
-/* Glass navbar */
-.glass-nav {
-  display: flex;
-  gap: 28px;
-  padding: 14px 32px;
-  border-radius: 999px;
-  background: rgba(20, 20, 20, 0.65);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
-    0 10px 30px rgba(0, 0, 0, 0.6);
-}
-
-/* Nav items */
-.nav-item {
-  position: relative;
-  font-size: 15px;
-  font-weight: 500;
-  color: #9ca3af;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-/* Hover */
-.nav-item:hover {
-  color: #e5e7eb;
-}
-
-/* Active state */
-.nav-item.active {
+/* ================================
+   LOGO (LEFT SIDE)
+================================ */
+.navbar-logo a {
+  font-size: 16px;
+  font-weight: 600;
   color: #ffffff;
+  text-decoration: none;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
 }
 
-/* Active glow underline */
-.nav-item.active::after {
-  content: "";
+/* ================================
+   GLASS CAPSULE NAVBAR (CENTER)
+================================ */
+.glass-nav {
   position: absolute;
   left: 50%;
-  bottom: -10px;
-  width: 60%;
-  height: 2px;
-  background: linear-gradient(90deg, #ff7a18, #ffb347);
   transform: translateX(-50%);
+
+  display: flex;
+  align-items: center;
+  padding: 14px 38px;
+  border-radius: 999px;
+
+  background: rgba(14, 14, 14, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 10px 30px rgba(0, 0, 0, 0.75);
+}
+
+/* ================================
+   NAV LIST
+================================ */
+.nav-items {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ================================
+   NAV ITEM BASE
+================================ */
+.nav-item {
+  position: relative;
+  height: 18px;
+  overflow: hidden;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* ================================
+   TEXT LAYERS
+================================ */
+.nav-text {
+  display: block;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 18px;
+  transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+/* Default text (visible) */
+.nav-text.default {
+  color: #e5e7eb;
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Hover text (hidden initially) */
+.nav-text.hover {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  color: #ff6a00;
+  opacity: 0;
+}
+
+/* ================================
+   HOVER ANIMATION (CORRECT LOGIC)
+================================ */
+.nav-item:hover .nav-text.default {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.nav-item:hover .nav-text.hover {
+  transform: translateY(-100%);
+  opacity: 1;
+}
+
+/* ================================
+   HAMBURGER (MOBILE)
+================================ */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.hamburger span {
+  width: 22px;
+  height: 2px;
+  background: #ffffff;
   border-radius: 4px;
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+@media (max-width: 768px) {
+  .glass-nav {
+    position: static;
+    transform: none;
+    margin: 0 auto;
+  }
+
+  .nav-items {
+    display: none;
+  }
+
+  .glass-nav.open .nav-items {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-top: 14px;
+  }
+
+  .hamburger {
+    display: flex;
+  }
 }
