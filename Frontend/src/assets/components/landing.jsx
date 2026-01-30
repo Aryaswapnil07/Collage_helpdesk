@@ -3,36 +3,46 @@ import "../../App.css";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
+// 1. Import the StarBorder component
+import StarBorder from "./StarBorder";
 
 const Landing = () => {
   const navigate = useNavigate();
  
   return (
     <div>
-      {/*  Hero Section  */}
+      {/* Hero Section  */}
       <section className="hero">
         <div className="hero-text">
           <h1>Welcome to Our College</h1>
           <p>Inspiring students to lead with knowledge and innovation.</p>
         </div>
       </section>
-      <motion.div
-        initial={{ scale: 0.9 }}
-        animate={{ scale: 1 }}
-        transition={{
-          duration: 1,
-          ease: "easeInOut",
-          repeat: Infinity,
-          repeatType: "reverse",
-        }}
-        onClick={() => navigate("/NewApplicants")}
-        className="bg-yellow-600 cursor-pointer w-[80vw] mx-auto py-4 text-center rounded-md mt-6 "
-        style={{ margin: "auto", marginTop: "54px", padding: "20px 0" }}
-      >
-        <span className="absolute left-[-40px] text-3xl "> 👉🏻</span>{" "}
-        <span className="">🏫 Guidelines for New Applicants</span>{" "}
-      </motion.div>
+
+      {/* 2. MODIFIED SECTION: Guidelines for New Applicants */}
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: "54px" }}>
+        <StarBorder
+          as={motion.div}
+          className="cursor-pointer w-[80vw]"
+          color="cyan" // You can change this to "magenta" or "#ca8a04" (gold)
+          speed="4s"
+          initial={{ scale: 0.9 }}
+          animate={{ scale: 1 }}
+          transition={{
+            duration: 1,
+            ease: "easeInOut",
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+          onClick={() => navigate("/NewApplicants")}
+        >
+          {/* Content inside the border */}
+          <span className="text-xl md:text-2xl">
+            👉🏻 🏫 Guidelines for New Applicants
+          </span>
+        </StarBorder>
+      </div>
+
       <section className="section" id="overview">
         <h2>Mission & Vision</h2>
         <p>
@@ -59,7 +69,7 @@ const Landing = () => {
         </p>
       </section>
 
-      {/*  Departments  */}
+      {/* Departments  */}
       <section className="section" id="departments">
         <h2>Departments</h2>
         <ul className="highlights">
@@ -101,7 +111,7 @@ const Landing = () => {
         </a>
       </section>
 
-      {/*  Admissions  */}
+      {/* Admissions  */}
       <section className="section" id="admissions">
         <h2>Admissions</h2>
         <h3>How to Apply</h3>
@@ -120,7 +130,7 @@ const Landing = () => {
         </a>
       </section>
 
-      {/*  Student Resources  */}
+      {/* Student Resources  */}
       <section className="section" id="resources">
         <h2>Student Resources</h2>
         <ul className="highlights">
@@ -157,7 +167,7 @@ const Landing = () => {
         </a>
       </section>
 
-      {/*  Smart Features  */}
+      {/* Smart Features  */}
       <section className="section" id="features">
         <h2>Smart Features</h2>
         <ul className="highlights">
@@ -179,7 +189,7 @@ const Landing = () => {
         </ul>
       </section>
 
-      {/*  Developer’s Corner  */}
+      {/* Developer’s Corner  */}
       <section className="section" id="developer">
         <h2>Developer's Corner 💻</h2>
         <h3>Project Overview</h3>
@@ -198,7 +208,7 @@ const Landing = () => {
         <p>Detailed blog post and GitHub repository.</p>
       </section>
 
-      {/*  Gallery  */}
+      {/* Gallery  */}
       <section className="section" id="gallery">
         <h2>Gallery</h2>
         <ul className="highlights">
@@ -214,7 +224,7 @@ const Landing = () => {
         </ul>
       </section>
 
-      {/*  Contact  */}
+      {/* Contact  */}
       <section className="section" id="contact" style={{ textAlign: "left" }}>
         <h2>Contact</h2>
         <p>
